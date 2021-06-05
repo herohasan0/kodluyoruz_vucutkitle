@@ -4,6 +4,7 @@ import Description from './components/Description';
 import About from './components/About';
 import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 function App() {
   const [kilo, setKilo] = useState(0);
@@ -21,8 +22,21 @@ function App() {
     //kilo / (boy)*(boy)  (metre cinsinden)
   }
 
+  const Title = styled.h1`
+    font-size: 1.5em;
+    text-align: center;
+    color: palevioletred;
+  `;
+  const Wrapper = styled.section`
+    padding: 4em;
+    background: papayawhip;
+  `;
+
   return (
     <div className="App">
+      <Wrapper>
+        <Title>Hello World!</Title>
+      </Wrapper>
       <Router>
         <div>
           <nav>
