@@ -1,8 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import Layout from './components/Layout';
 import Description from './components/Description';
+import About from './components/About';
 import { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
   const [kilo, setKilo] = useState(0);
@@ -22,6 +23,26 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+
       <Layout />
 
       <Description />
