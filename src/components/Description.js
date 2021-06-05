@@ -1,8 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Div = styled.div`
+  border: 5px solid #000;
+  padding: 20px;
+  width: 50%;
+  margin: 0;
+  margin-right: 20px;
+  margin-left: 20px;
+`;
 
 function Description({ props }) {
   return (
-    <div>
+    <Div>
       Obezite hesaplamada kilonuzun, boy değerinizin karesine bölünmesiyle
       (kg/m²) hesaplanan Vücut Kitle İndeksi (VKİ) değeri kullanılır ve Dünya
       Sağlık Örgütü'nün referans aralığı temel alınır. Vücut kitle indeksi
@@ -24,7 +34,7 @@ function Description({ props }) {
       öğrenebilirsiniz. Eğer değerleriniz normalin altında ya da üstündeyse,
       diyetisyen ya da hekiminiz başka ek tetkikler de isteyerek (kas yoğunluğu
       ölçümü, kan değerleri vb.) size uygun tedaviyi belirleyecektir.
-    </div>
+    </Div>
   );
 }
 

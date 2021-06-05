@@ -1,10 +1,7 @@
 import './App.css';
 import Layout from './components/Layout';
 import Description from './components/Description';
-import About from './components/About';
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 function App() {
   const [kilo, setKilo] = useState(0);
@@ -18,70 +15,62 @@ function App() {
     const calculatedBIM = kg / Math.pow(cm, 2);
 
     setBIM(calculatedBIM);
-
-    //kilo / (boy)*(boy)  (metre cinsinden)
   }
 
-  const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: palevioletred;
-  `;
-  const Wrapper = styled.section`
-    padding: 4em;
-    background: papayawhip;
-  `;
+  let detay = '';
+
+  if (BIM !== 0 && BIM < 18.5) {
+    detay = 'Zayıf';
+  } else if (BIM > 18.5 && BIM < 24.9) {
+    detay = 'Normal kilolu';
+  } else if (BIM > 25 && BIM < 29.9) {
+    detay = 'Fazla kilolu';
+  } else if (BIM > 30 && BIM < 39.9) {
+    detay = 'Obez';
+  } else if (BIM > 40) {
+    detay = 'İleri derecede obez (morbid obez)';
+  }
 
   return (
     <div className="App">
-      <Wrapper>
-        <Title>Hello World!</Title>
-      </Wrapper>
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            </ul>
-          </nav>
-
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-
       <Layout />
 
-      <Description />
-      <form>
-        <label>
-          Kilonuzu giriniz
-          <input
-            type="number"
-            name="Kilo"
-            onChange={(event) => setKilo(event.target.value)}
-          />
-        </label>
+      <div className="main">
+        <Description />
+        <div className="form">
+          <section className="calculation">
+            <div>
+              <label className="label">
+                Kilonuzu giriniz
+                <input
+                  type="number"
+                  name="Kilo"
+                  onChange={(event) => setKilo(event.target.value)}
+                  value={kilo}
+                />
+              </label>
+            </div>
 
-        <label>
-          Boyunuzu giriniz
-          <input
-            type="number"
-            name="Boy"
-            onChange={(event) => setBoy(event.target.value)}
-          />
-        </label>
-        <buttun onClick={calculate}>hesapla</buttun>
-      </form>
-
-      <h1>{BIM}</h1>
+            <div>
+              <label className="label">
+                Boyunuzu giriniz
+                <input
+                  type="number"
+                  name="Boy"
+                  onChange={(event) => setBoy(event.target.value)}
+                  value={boy}
+                />
+              </label>
+            </div>
+            <button onClick={calculate}>hesapla</button>
+          </section>
+          <section className="result">
+            <span>Sonucunuz!</span>
+            <h1>{BIM}</h1>
+            <span>{detay}</span>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }
