@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Layout from './components/Layout';
+import Description from './components/Description';
 import { useState } from 'react';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
     <div className="App">
       <Layout />
 
+      <Description />
       <form>
         <label>
           Kilonuzu giriniz
