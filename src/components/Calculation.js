@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const calculatedValue = JSON.parse(localStorage.getItem('value'))
   ? JSON.parse(localStorage.getItem('value'))
-  : '';
+  : [];
 
 function Calculation(params) {
   const [kilo, setKilo] = useState(0);
