@@ -2,6 +2,8 @@ import './Calculation.css';
 import React from 'react';
 import { useState } from 'react';
 
+const calculatedValue = [];
+
 function Calculation(params) {
   const [kilo, setKilo] = useState(0);
   const [boy, setBoy] = useState(0);
@@ -11,9 +13,21 @@ function Calculation(params) {
     const kg = Number(kilo);
     const cm = Number(boy) / 100;
 
-    const calculatedBIM = kg / Math.pow(cm, 2);
+    //Kilogram / boyun metre cinsinden karesi islemiyle BMI hesapliyoruz
+    let calculatedBIM = kg / Math.pow(cm, 2);
 
-    setBIM(calculatedBIM);
+    //Virgulden sonra bir basamak almak icin stringe cevirip sonra slice
+    //fonksiyonuyla ilk dort basamagı seciyoruz
+    calculatedBIM = calculatedBIM.toString().slice(0, 4);
+
+    //Hesaplanan degeri hesaplanandegerler array'imize atıyoruz.
+    calculatedValue.push(calculatedBIM);
+
+    //Bu degeri localstorage'ye kaydediyoruz
+    localStorage.setItem('value', JSON.stringify(calculatedValue));
+
+    //State degerimizi guncelliyoruz
+    setBIM(Number(calculatedBIM));
   }
   let detay = '';
 

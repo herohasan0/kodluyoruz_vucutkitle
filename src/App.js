@@ -40,7 +40,7 @@ function App() {
           <Route path="/history">
             <div className="main">
               <Description />
-              <Deneme2 />
+              <History />
             </div>
           </Route>
           <Route path="/">
