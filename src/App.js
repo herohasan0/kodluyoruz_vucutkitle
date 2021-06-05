@@ -1,78 +1,62 @@
 import './App.css';
 import Layout from './components/Layout';
 import Description from './components/Description';
-import { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import History from './components/History';
+import Calculation from './components/Calculation';
+
+const Li = styled.li`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+  margin-right: 20px;
+`;
+const Ul = styled.ul`
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  margin-top: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+`;
 
 function App() {
-  const [kilo, setKilo] = useState(0);
-  const [boy, setBoy] = useState(0);
-  const [BIM, setBIM] = useState(0);
-
-  function calculate() {
-    const kg = Number(kilo);
-    const cm = Number(boy) / 100;
-
-    const calculatedBIM = kg / Math.pow(cm, 2);
-
-    setBIM(calculatedBIM);
-  }
-
-  let detay = '';
-
-  if (BIM !== 0 && BIM < 18.5) {
-    detay = 'Zayıf';
-  } else if (BIM > 18.5 && BIM < 24.9) {
-    detay = 'Normal kilolu';
-  } else if (BIM > 25 && BIM < 29.9) {
-    detay = 'Fazla kilolu';
-  } else if (BIM > 30 && BIM < 39.9) {
-    detay = 'Obez';
-  } else if (BIM > 40) {
-    detay = 'İleri derecede obez (morbid obez)';
-  }
-
   return (
-    <div className="App">
-      <Layout />
+    <Router>
+      <div>
+        <nav>
+          <Ul>
+            <Li>
+              <Link to="/">Hesapla</Link>
+            </Li>
+            <Li>
+              <Link to="/history">History</Link>
+            </Li>
+          </Ul>
+        </nav>
 
-      <div className="main">
-        <Description />
-        <div className="form">
-          <section className="calculation">
-            <div>
-              <label className="label">
-                Kilonuzu giriniz
-                <input
-                  type="number"
-                  name="Kilo"
-                  onChange={(event) => setKilo(event.target.value)}
-                  value={kilo}
-                />
-              </label>
+        <Switch>
+          <Route path="/history">
+            <div className="main">
+              <Description />
+              <Deneme2 />
             </div>
-
-            <div>
-              <label className="label">
-                Boyunuzu giriniz
-                <input
-                  type="number"
-                  name="Boy"
-                  onChange={(event) => setBoy(event.target.value)}
-                  value={boy}
-                />
-              </label>
+          </Route>
+          <Route path="/">
+            <div className="main">
+              <Description />
+              <Calculation />
             </div>
-            <button onClick={calculate}>hesapla</button>
-          </section>
-          <section className="result">
-            <span>Sonucunuz!</span>
-            <h1>{BIM}</h1>
-            <span>{detay}</span>
-          </section>
-        </div>
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
+}
+
+function Deneme2() {
+  return <h1>deneme 2</h1>;
 }
 
 export default App;
