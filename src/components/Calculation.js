@@ -1,8 +1,12 @@
 import './Calculation.css';
 import React from 'react';
 import { useState } from 'react';
+import Box from './Box';
+import styled from 'styled-components';
 
-const calculatedValue = [];
+const calculatedValue = JSON.parse(localStorage.getItem('value'))
+  ? JSON.parse(localStorage.getItem('value'))
+  : '';
 
 function Calculation(params) {
   const [kilo, setKilo] = useState(0);
@@ -42,12 +46,25 @@ function Calculation(params) {
   } else if (BIM > 40) {
     detay = 'İleri derecede obez (morbid obez)';
   }
+
+  const Button = styled.button`
+    background-color: #fff;
+    border: 3px solid #000;
+    color: black;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 15px;
+  `;
+
   return (
-    <div className="calculate">
+    <Box>
       <div className="form">
-        <section className="calculation">
+        <section className="first">
           <div>
-            <label className="label">
+            <label>
               Kilonuzu giriniz
               <input
                 type="number"
@@ -59,7 +76,7 @@ function Calculation(params) {
           </div>
 
           <div>
-            <label className="label">
+            <label style={{ marginTop: '15px' }}>
               Boyunuzu giriniz
               <input
                 type="number"
@@ -69,15 +86,15 @@ function Calculation(params) {
               />
             </label>
           </div>
-          <button onClick={calculate}>hesapla</button>
+          <Button onClick={calculate}>hesapla</Button>
         </section>
-        <section className="result">
+        <section className="second">
           <span>Sonucunuz!</span>
           <h1>{BIM}</h1>
           <span>{detay}</span>
         </section>
       </div>
-    </div>
+    </Box>
   );
 }
 
